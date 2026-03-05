@@ -89,7 +89,7 @@ encrypted by Apple and are themselves random strings which cannot be tied to use
 Those are downloaded first by server side into server DB, then downloaded with separate RPC call by apps.
 This is done to limit amount of API calls to exchange rate providers.
 
-API keys are replaced in code with <censored> strings, so if you want to deploy, get and insert your own API keys.
+API keys are replaced in code with `censored` string, so if you want to deploy, get and insert your own API keys.
 
 ## Great Wall proxy
 
