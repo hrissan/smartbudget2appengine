@@ -1,0 +1,52 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+  
+- url: /robots\.txt
+  static_files: robots.txt
+  upload: robots\.txt
+
+- url: /check\.php
+  script: check.app
+  secure: optional
+- url: /check_proxy\.php
+  script: check.app
+  secure: optional
+
+- url: /sbs\.php
+  script: sbs.app
+  secure: optional
+- url: /sbs_proxy\.php
+  script: sbs.app
+  secure: optional
+- url: /sbs_upgrade\.php
+  script: sbs.app
+  secure: optional
+  login: admin
+- url: /sbs_destroy\.php
+  script: sbs.app
+  secure: optional
+  login: admin
+
+- url: /quotes\.php
+  script: quotes.app
+  secure: optional
+- url: /quotes_proxy\.php
+  script: quotes.app
+  secure: optional
+- url: /quotes_cron\.php
+  script: quotes.app
+  secure: optional
+  login: admin
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+
+- name: pycrypto
+  version: "2.6"

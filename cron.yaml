@@ -1,0 +1,4 @@
+cron:
+- description: quotes update
+  url: /quotes_cron.php?base=USD
+  schedule: every 6 hours

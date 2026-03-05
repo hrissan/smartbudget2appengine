@@ -1,0 +1,60 @@
+PATH=$(pyenv root)/shims:$PATH
+
+smartbudgetappengine % ~/google-cloud-sdk/bin/gcloud app deploy --version=16 --project=smartbudgetapp
+
+smartbudgetappengine2 % ~/google-cloud-sdk/bin/dev_appserver.py app.yaml 
+smartbudgetappengine2 % ~/google-cloud-sdk/bin/gcloud app deploy --version=26 --project=smartbudgetapp2
+
+Download quotes
+http://localhost:8080/quotes_cron.php?base=USD
+
+Get quotes
+http://localhost:8080/quotes.php?base=USD
+
+Create document
+
+>>> import hashlib
+>>> hashlib.sha1("MagicReceipt").hexdigest()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: Unicode-objects must be encoded before hashing
+>>> hashlib.sha1("MagicReceipt".encode("utf-8")).hexdigest()
+'c9f2816eb5243b4a7d94117174d4365498963678'
+
+
+SELECT * FROM Change WHERE __key__ HAS Ancestor Key(Document, '--2aSqBIaaPHEbbW3YYpmy0B3pa-pueK') and num=58
+
+http://localhost:8080/sbs.php?cmd=create_doc&delta=1&body=QUJDRA==
+{
+    "a_token": "1CQgTASLe5RXIrIUORn3vh2mBIzNMxq9",
+    "result": "create_doc",
+    "last_change": 1
+}
+
+http://localhost:8080/sbs.php?cmd=sync&last_change=1&delta=1&a_token=1CQgTASLe5RXIrIUORn3vh2mBIzNMxq9&body=RQ==
+{
+    "result": "commited",
+    "changes": [
+        {
+            "body": "RQ==",
+            "datetime": "2022-07-24 15:17:59.866509",
+            "id": 2
+        }
+    ]
+}
+
+http://localhost:8080/sbs.php?cmd=sync&last_change=2&delta=1&a_token=1CQgTASLe5RXIrIUORn3vh2mBIzNMxq9&body=Rg==
+{
+    "result": "commited",
+    "changes": [
+        {
+            "body": "Rg==",
+            "datetime": "2022-07-24 15:19:33.233918",
+            "id": 3
+        }
+    ]
+}
+
+
+Record holder
+January 18, 2015 at 9:31:20 AM UTC+3..July 6, 2022 at 4:22:33 PM UTC+3 	16247580 changes
