@@ -21,7 +21,7 @@ When DB is created, a long random database name string is generated. To access D
 
 So to download someone's DB, first you need to know this string, which is either transferred between devices automatically via iCloud sync, so any DB you add on your iPhone magically appears on your iPad and other devices.
 
-Or you can explicitly share DB from app by pressing button and sending e-mail with special link, containin DB name and encryption key, about it later.
+Or you can explicitly share DB from app by pressing button and sending e-mail with special link, containin DB name and encryption key (encryption is discussed later in this document).
 
 ### DB organization and sync
 
@@ -56,7 +56,7 @@ the same list of changes, resulting in the same data displayed to the user.
 
 Each devices stores list of changes in SQLite database together with result of playing back those changes (state). 
 
-So there could be million expenses on account and it could be renamed several times through history, but most recent account name, balance, and list of expenses to display is stored separately in the same SQLite database, so app will started immediately without iterating through all changes. There were actual user databases with million+ changes and still after initial sync, Smart Budget app will start immediately.
+So there could be million expenses on account and it could be renamed several times through history, but most recent account name, balance, and list of expenses to display is stored separately in the same SQLite database, so app will start and show information immediately, without iterating through all changes. There were actual user databases with million+ changes and still after initial sync, Smart Budget app will start immediately.
 
 List of changes is simple, and format of each change itself is also simple, because this format must be parsed and replayed by all future version of Smart Budget.
 
@@ -76,6 +76,13 @@ Every change also has special tag (HMAC) appended, which cryptographically ties 
 
 So changes from other DB or changes with incorrect position in list will not be accidentally (or maliciously) integrated by Smart Budget app if
 sent by attacker who gets control of Smart Budget server.
+
+Smart Budget app does not send and server does not store any tracking information (IP addresses, any information about user device,
+any information about user, no e-mail address, nothing). 
+
+Smart Budget app sends and server stores payment receipts from App Store, so if database is added on device
+with full version of Smart Budget, transaction limit is removed. But those payment receipts are correctly
+encrypted by Apple and are themselves random strings which cannot be tied to user.
 
 ## exchange rates
 
