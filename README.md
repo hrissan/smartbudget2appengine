@@ -72,10 +72,7 @@ which can be synched, but cannot be looked into. Device B must have the same enc
 
 Exactly as DB name, encryption key is automatically transferred between user's devices vie iCloud, or can be sent via e-mail when user presser "Share DB" button. 
 
-Every change also has special tag (HMAC) appended, which cryptographically ties together change ID, DB name it belongs to, actual change bytes and encryption key.
-
-So changes from other DB or changes with incorrect position in list will not be accidentally (or maliciously) integrated by Smart Budget app if
-sent by attacker who gets control of Smart Budget server.
+App tries decrypting changes before integrating into local DB, so will not integrate changes sent by attacker who does not know encryption key, if that attacker somehow gets control of Smart Budget server.
 
 Smart Budget app does not send and server does not store any tracking information (IP addresses, any information about user device,
 any information about user, no e-mail address, nothing). 
@@ -95,3 +92,8 @@ API keys are replaced in code with `censored` string, so if you want to deploy, 
 
 Google App engine often had bad or no connectivity from China, so simple proxy was deployed in Hong Kong and Singapore, sending
 data between Smart Budget app and server.
+
+## App Removal
+
+All app data in the cloud was wiped by Google in 2025 together with my account for payment with foreign bank card,
+stating sanctions violation.
