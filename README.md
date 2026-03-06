@@ -37,7 +37,7 @@ Simultneously other device B could have added changes B1 and B2, so changes in l
 
 Now, some device will sync to server first, let's say it is A, it sends offset 3 and its changes [A1, A2], and server adds them to server storage, resulting in list [1, 2, 3, A1, A2], now A1 and A2 got permanent IDs 4 and 5, and we we will refer to them as 4 and 5, so in server DB list looks like [1, 2, 3, 4, 5], device A gets suffix of this list starting from offset 3 as a response to sync RPC call, and this is new local DB on device A.
 
-Now when device B sends it's own changes [B1, B2] together with starting offset 3, server intead replies with existing changes [4, 5], and device B first adds new changes [4, 5] to its DB, then rebases (applies after), its own changes [B1, B2], so list on device B temporarily looks like [1, 2, 3, 4, 5] [B1, B2].
+Now when device B sends it's own changes [B1, B2] together with starting offset 3, server instead replies with existing changes [4, 5], and device B first adds new changes [4, 5] to its DB, then rebases (applies after), its own changes [B1, B2], so list on device B temporarily looks like [1, 2, 3, 4, 5] [B1, B2].
 
 But during rebase, conflicts can occur, for example, 4 could be deleting account, and B1 is renaming that same account.
 
@@ -49,7 +49,7 @@ changes [B1, B2] and now server successfully adds changes to the server DB, assi
 
 Then server sends push notification to A, so A will sync again, sending its offset 5 and no changes, and will get [6, 7] and add them to local DB.
 
-This process advances either server or local state under any sequence of sync, so progress is made every iteration and all devices will quickly get
+This process advances either server or local list of changes after every sync, so progress is made every iteration, and all devices will quickly get
 the same list of changes, resulting in the same data displayed to the user.
 
 ## Details on local storage
